@@ -12,8 +12,8 @@ function MobileMenu() {
   ];
 
   //styling /*  */
-  const mobileMenuStyle = `min-h-screen  backdrop-blur-lg w-[60vw] absolute
-    top-0 bottom-0 right-0 z-0  text-white `;
+  const mobileMenuStyle = `min-h-screen bg-[#F4F4F4] w-[60vw] absolute
+    top-0 bottom-0 right-0 z-0 text-black `;
   const navMenuStyle = `pt-[15vh] pl-8 flex flex-col gap-4`;
   
 
