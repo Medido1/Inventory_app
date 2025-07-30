@@ -1,12 +1,12 @@
-import {createContext, useReducer, useRef, useState } from "react";
+import {createContext, useState } from "react";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({children}) => {
-
-  const value = {} //place holder delete later
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   return (
-    <GlobalContext.Provider value={value} >
+    <GlobalContext.Provider value={{isMenuOpen, setIsMenuOpen}} >
       {children}
     </GlobalContext.Provider>
   )
