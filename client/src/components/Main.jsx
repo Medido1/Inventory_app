@@ -2,6 +2,7 @@ import introIcon from '../assets/books.gif';
 import viewIcon from '../assets/viewbooks.gif';
 import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
+import NewBookForm from './NewBookForm';
 
 function Main() {
   return (
@@ -35,6 +36,7 @@ function Main() {
           View Categories
         </Link>
       </div>
+      <NewBookForm />
     </main>
   )
 }
