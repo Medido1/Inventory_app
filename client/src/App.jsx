@@ -6,6 +6,8 @@ import Header from './components/Header';
 import MobileMenu from './components/MobileMenu';
 import Main from './components/Main';
 
+const Books = lazy(() => import('./components/Books'));
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <MobileMenu />
         <Routes>
           <Route path='/' element={<Main />} />
+          <Route path='/books' element={<Books />}/>
         </Routes>
       </div>
       

@@ -16,7 +16,6 @@ function MobileMenu() {
     top-0 bottom-0 right-0 z-0 text-black `;
   const navMenuStyle = `pt-[15vh] pl-8 flex flex-col gap-4`;
   
-
   return (
     <AnimatePresence>
       {isMenuOpen && 

@@ -1,6 +1,7 @@
 import introIcon from '../assets/books.gif';
 import viewIcon from '../assets/viewbooks.gif';
 import categoriesIcon from '../assets/categories.gif';
+import { Link } from 'react-router-dom';
 
 function Main() {
   return (
@@ -19,7 +20,11 @@ function Main() {
       <div className='p-4 shadow-lg rounded-lg mt-4 bg-white 
         flex justify-center items-center gap-4'>
         <img src={viewIcon} alt="icon" className='h-10' />
-        <h2 className='text-xl text-center'>View Books</h2>
+        <Link 
+          to={'/books'}
+          className='text-xl text-center'>
+          View Books
+        </Link>
       </div>
       <div className='p-4 shadow-lg rounded-lg mt-4 bg-white 
         flex justify-center items-center gap-4'>
