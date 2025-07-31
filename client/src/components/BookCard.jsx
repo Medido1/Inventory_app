@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { Link } from "react-router-dom";
 
 function BookCard({book}) {
   return (
@@ -10,11 +10,13 @@ function BookCard({book}) {
       <div className="ml-2 text-center flex-1">
         <h2 className="text-2xl">{book.title}</h2>
         <p>{book.author}</p>
-        <ul className="text-blue-400">
+        <ul className="text-blue-400 flex flex-col">
           {book.categories.map((category) =>
-            <li key={category}>
+            <Link 
+              to={`/categories/${category}`}
+              key={category}>
               {category}
-            </li>
+            </Link>
           )}
         </ul>
       </div>

@@ -29,7 +29,11 @@ function Main() {
       <div className='p-4 shadow-lg rounded-lg mt-4 bg-white 
         flex justify-center items-center gap-4'>
         <img src={categoriesIcon} alt="icon" className='h-10' />
-        <h2 className='text-xl text-center'>View Categories</h2>
+        <Link 
+          to={'/categories'}
+          className='text-xl text-center'>
+          View Categories
+        </Link>
       </div>
     </main>
   )
