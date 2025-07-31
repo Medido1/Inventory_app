@@ -1,5 +1,5 @@
-import ZorbaCover from './src/assets/zorba.jpg';
-import duneCover from './src/assets/dune.jpg';
+import ZorbaCover from '../assets/zorba.jpg';
+import duneCover from '../assets/dune.jpg';
 
 const bookList = [
   { 

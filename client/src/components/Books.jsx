@@ -1,8 +1,14 @@
+import { useContext, useEffect } from 'react';
 import viewIcon from '../assets/viewbooks.gif';
-import bookList from '../../books';
+import {GlobalContext} from '../context/GlobalContext';
 import BookCard from './BookCard';
 
 function Books() {
+  const {booksData} = useContext(GlobalContext);
+
+  useEffect(() => {
+    console.log(booksData)
+  }, [])
   return (
     <div className="p-4">
       <div className='flex items-center gap-4 mb-4'>
@@ -10,7 +16,7 @@ function Books() {
         <h1 className="text-2xl text-center">My Books</h1>
       </div>
       <ul>
-        {bookList.map((book) => 
+        {booksData.map((book) => 
           <li key={book.id}>
             <BookCard book = {book}/>
           </li>

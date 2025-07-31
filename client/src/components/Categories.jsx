@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import bookList from '../../books';
+import { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
 
 function Categories() {
   const [categoriesList, setCategoriesList] = useState([]);
+  const {booksData} = useContext(GlobalContext);
 
   useEffect(() => {
     const uniqueCategories = [];
-    bookList.forEach((book) => {
+    booksData.forEach((book) => {
       book.categories.forEach((category) => {
         if (!uniqueCategories.includes(category)) {
           uniqueCategories.push(category)

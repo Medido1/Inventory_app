@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom'; /* access URL parameters defined in route paths. */
-import bookList from '../../books';
-import { useEffect } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 import BookCard from './BookCard';
+import { useContext } from 'react';
 
 function BookByCategory() {
+  const {booksData} = useContext(GlobalContext);
   const { categoryName } = useParams(); //get category name from url
-  const filterdBooks = bookList.filter(book => book.categories.includes(categoryName))
+  const filterdBooks = booksData.filter(book => book.categories.includes(categoryName))
 
   return (
     <div className='p-4'>
