@@ -80,7 +80,11 @@ function CoverInput() {
               <button
                 className="bg-green-200 p-2 rounded-md"
                 /* opens the file picker without showing the default file input UI. */
-                onClick={() => fileInputRef.current.click()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  fileInputRef.current.click()
+                  }
+                }
               >
                 Change
               </button>
@@ -98,7 +102,7 @@ function CoverInput() {
         ): (
           <div className="flex justify-center gap-2">
             <p className="text-xs font-display font-thin">
-              Upload your photo (JPG or PNG, max size: 500KB).
+              Upload your photo (JPG or PNG, max size: 600KB).
             </p>
           </div>
       )}
