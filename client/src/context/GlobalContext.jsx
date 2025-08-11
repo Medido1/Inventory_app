@@ -3,7 +3,7 @@ import bookList from '../data/books';
 import AppReducer from "./AppReducer";
 
 export const initialState = {
-  img: "",
+  cover: "",
   title: "",
   author: "",
   categories: [],
@@ -49,13 +49,19 @@ export const GlobalProvider = ({children}) => {
       type: "REMOVE_CATEGORY", payload: category
     })
   }
+
+  function setCover(cover) {
+    dispatch ({
+      type: "SET_COVER", payload: cover
+    })
+  }
   
   return (
     <GlobalContext.Provider value={{
       isMenuOpen, setIsMenuOpen, 
       booksData, setBooksData, 
       state, dispatch, setTitle, setAuthor,
-      setCategories, removeCategory}} >
+      setCategories, removeCategory, setCover}} >
       {children}
     </GlobalContext.Provider>
   )

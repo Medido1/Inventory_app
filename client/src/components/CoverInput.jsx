@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import uploadIcon from '../assets/upload.png';
+import { GlobalContext } from "../context/GlobalContext";
 
 function CoverInput() {
   const [errMsg, setErrMsg] = useState("");
+  const {setCover} = useContext(GlobalContext)
 
   const [isDragging, setIsDragging] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -34,11 +36,12 @@ function CoverInput() {
     const isValidSize = file.size <= 600 * 1024; // 600KB
   
     if (!isValidType || !isValidSize) {
-      setErrMsg("Invalid file!! Please choose a JPG or PNG image under 500KB.");
+      setErrMsg("Invalid file!! Please choose a JPG or PNG image under 600KB.");
       setPreviewUrl(null);
     } else {
       const imageUrl = URL.createObjectURL(file);
       setPreviewUrl(imageUrl);
+      setCover(imageUrl)
       setErrMsg("");
     }
   };
