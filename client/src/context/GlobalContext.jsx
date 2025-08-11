@@ -43,12 +43,19 @@ export const GlobalProvider = ({children}) => {
       type: "SET_CATEGORY", payload: category
     })
   }
+
+  function removeCategory(category) {
+    dispatch ({
+      type: "REMOVE_CATEGORY", payload: category
+    })
+  }
   
   return (
     <GlobalContext.Provider value={{
       isMenuOpen, setIsMenuOpen, 
       booksData, setBooksData, 
-      state, dispatch, setTitle, setAuthor, setCategories}} >
+      state, dispatch, setTitle, setAuthor,
+      setCategories, removeCategory}} >
       {children}
     </GlobalContext.Provider>
   )

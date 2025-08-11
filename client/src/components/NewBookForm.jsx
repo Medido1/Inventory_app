@@ -1,22 +1,20 @@
-import { useContext, useEffect, useState, useReducer } from "react";
+import { useContext, useEffect, useState} from "react";
 import CoverInput from './CoverInput';
 import { GlobalContext } from "../context/GlobalContext";
 
 function NewBookForm() {
-  const {state, dispatch, setTitle, setAuthor, setCategories} = useContext(GlobalContext)
+  const {state, dispatch, 
+      setTitle, setAuthor,
+      setCategories, removeCategory} = useContext(GlobalContext)
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
-  useEffect(() => {
-    console.log(state.categories)
-  }, [state])
   
   const handleKeyDown = (e) => {
     if ((e.key === "Enter") && inputValue.trim() !=="") {
       e.preventDefault();
       if (!tags.includes(inputValue.trim())){
         setTags([...tags, inputValue.trim()])
-        dispatch({type: "SET_CATEGORY", payload: inputValue.trim()})
+        setCategories(inputValue.trim())
       }
       setInputValue("");
     }
@@ -24,7 +22,7 @@ function NewBookForm() {
 
   const removeTag = (tagToRemove) => {
     setTags(tags.filter(tag => tag !== tagToRemove))
-    setCategories(state.categories.filter(category => category !== tagToRemove))
+    removeCategory(tagToRemove)
   };
 
   return (
