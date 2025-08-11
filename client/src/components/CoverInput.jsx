@@ -76,7 +76,10 @@ function CoverInput() {
             <div className="flex gap-2">
               <button
                 className="bg-red-200 p-2 rounded-md"
-                onClick={() => setPreviewUrl(null)}
+                onClick={() => {
+                  setPreviewUrl(null)
+                  setCover(null)
+                }}
               >
                 Remove
               </button>

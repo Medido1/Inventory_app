@@ -3,9 +3,9 @@ import CoverInput from './CoverInput';
 import { GlobalContext } from "../context/GlobalContext";
 
 function NewBookForm() {
-  const {state, dispatch, 
-      setTitle, setAuthor,
-      setCategories, removeCategory} = useContext(GlobalContext)
+  const {state, booksData, setBooksData, 
+      setTitle, setAuthor, setCategories, 
+      removeCategory, resetState} = useContext(GlobalContext)
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   
@@ -25,8 +25,35 @@ function NewBookForm() {
     removeCategory(tagToRemove)
   };
 
+  function isFormValid() {
+    return state.title && state.author && state.categories.length > 0;
+  }
+
+  function submitBook() {
+    if (!isFormValid) {
+      alert("fill in the whole form !!");
+      return;
+    }
+
+    let newBookList = [];
+
+    const newBook = {
+      id: crypto.randomUUID(),
+      title: state.title,
+      author: state.author,
+      categories: state.categories,
+      cover: state.cover
+    }
+    newBookList = [...booksData, newBook];
+    setBooksData(newBookList);
+    resetState();
+    alert("new book added!")
+  }
+
   return (
-    <form action="" className='p-4 shadow-lg rounded-lg mt-4 bg-white
+    <form 
+      onSubmit={submitBook}
+      action="" className='p-4 shadow-lg rounded-lg mt-4 bg-white
       flex flex-col items-center gap-4'>
       <p className='text-xl font-bold'>Add a new book!</p>
       <div className='flex items-center gap-2 text-lg'>

@@ -56,12 +56,17 @@ export const GlobalProvider = ({children}) => {
     })
   }
   
+  function resetState() {
+    dispatch({type:"RESET_STATE"})
+  }
+
   return (
     <GlobalContext.Provider value={{
       isMenuOpen, setIsMenuOpen, 
       booksData, setBooksData, 
       state, dispatch, setTitle, setAuthor,
-      setCategories, removeCategory, setCover}} >
+      setCategories, removeCategory, setCover,
+      resetState}} >
       {children}
     </GlobalContext.Provider>
   )

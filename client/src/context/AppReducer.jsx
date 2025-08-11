@@ -1,3 +1,5 @@
+import {initialState} from "./GlobalContext";
+
 function AppReducer(state, action) {
   switch(action.type) {
     case "SET_TITLE":
@@ -25,6 +27,8 @@ function AppReducer(state, action) {
         ...state,
         cover: action.payload
       }
+    case "RESET_STATE":
+      return {...initialState}
     default:
       return state;
   }
