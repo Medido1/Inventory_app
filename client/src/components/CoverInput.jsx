@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalContext";
 
 function CoverInput() {
   const [errMsg, setErrMsg] = useState("");
-  const {previewUrl, setPreviewUrl} = useContext(GlobalContext)
+  const {previewUrl, setPreviewUrl, currentBook} = useContext(GlobalContext)
 
   const [isDragging, setIsDragging] = useState(false);
   
@@ -56,6 +56,12 @@ function CoverInput() {
     }
     
   };
+
+  useEffect(() => {
+    if (currentBook) {
+      setPreviewUrl(currentBook.cover)
+    }
+  }, [currentBook])
 
   return (
     <div className="w-full">

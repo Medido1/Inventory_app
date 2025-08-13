@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import viewIcon from '../assets/viewbooks.gif';
 import {GlobalContext} from '../context/GlobalContext';
 import BookCard from './BookCard';
+import NewBookForm from './NewBookForm';
 
 function Books() {
-  const {booksData} = useContext(GlobalContext);
+  const {booksData, showForm, currentBook} = useContext(GlobalContext);
 
   return (
     <div className="p-4">
@@ -19,6 +20,16 @@ function Books() {
           </li>
         )}
       </ul>
+      {showForm && 
+        <div>
+          <div className='fixed inset-0 bg-black/75 z-10 p-4 '></div>
+          <div className='absolute p-4 top-10 rounded-2xl z-20'>
+            <NewBookForm currentBook = {currentBook}/>
+          </div>
+          
+          
+        </div>
+      }
     </div>
   )
 }

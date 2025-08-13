@@ -6,7 +6,8 @@ function NewBookForm() {
   const {state, booksData, setBooksData, 
       setTitle, setAuthor, setCategories, 
       removeCategory, resetState, setPreviewUrl,
-      previewUrl, setBookModal} = useContext(GlobalContext)
+      previewUrl, setBookModal, currentBook,
+      setShowForm} = useContext(GlobalContext)
 
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -58,6 +59,20 @@ function NewBookForm() {
     setTags([]);
     setPreviewUrl(null);
   }
+
+
+  // When a currentBook is provided (e.g. editing an existing entry),
+  // populate the form fields with their saved data
+
+  useEffect(() => {
+    if (currentBook) {
+      setTitle(currentBook.title)
+      setAuthor(currentBook.author)
+      setTags(currentBook.categories)
+    }
+  }, [currentBook])
+
+
 
   return (
     <form 
@@ -111,11 +126,24 @@ function NewBookForm() {
         </div>
       </div>
       <CoverInput />
-      <button 
-        className="bg-gray-200 p-2 rounded-md"
-        type="submit">
-        Submit
-      </button>
+      {!currentBook ? 
+        (<button 
+          className="bg-gray-200 p-2 rounded-md"
+          >
+          Submit
+        </button>)
+        : 
+        (<div className="flex gap-2">
+          <button className="px-4 py-2 bg-green-200 rounded-md">
+            Save
+          </button>
+          <button 
+            onClick={() => setShowForm(false)}
+            className="px-4 py-2 bg-gray-200 rounded-md">
+            Cancel
+          </button>
+        </div>)
+      }
     </form>
   )
 }

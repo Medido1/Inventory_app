@@ -4,7 +4,8 @@ import { GlobalContext } from "../context/GlobalContext";
 import { useContext } from "react";
 
 function BookCard({book}) {
-  const {booksData, setBooksData} = useContext(GlobalContext)
+  const {booksData, setBooksData, setShowForm,
+    setCurrentBook} = useContext(GlobalContext)
 
   function DeleteBook(id) {
     if (
@@ -13,6 +14,12 @@ function BookCard({book}) {
       const filterdBooks = booksData.filter((book) => book.id !== id)
       setBooksData(filterdBooks)
     }
+  }
+
+  function EditBook(id) {
+    setShowForm(true)
+    const targetBook = booksData.find((book) => book.id === id);
+    setCurrentBook(targetBook)
   }
 
   return (
@@ -45,7 +52,7 @@ function BookCard({book}) {
       </div>
       <div className="flex justify-center gap-4 mt-4">
         <button 
-        
+          onClick={() => EditBook(book.id)}
           className="bg-green-200 px-4 py-2 rounded-lg cursor-pointer">
           Edit
         </button>
