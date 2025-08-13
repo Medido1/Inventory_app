@@ -6,7 +6,8 @@ function NewBookForm() {
   const {state, booksData, setBooksData, 
       setTitle, setAuthor, setCategories, 
       removeCategory, resetState, setPreviewUrl,
-      previewUrl} = useContext(GlobalContext)
+      previewUrl, setBookModal} = useContext(GlobalContext)
+
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   
@@ -32,10 +33,10 @@ function NewBookForm() {
 
   function submitBook(e) {
     e.preventDefault();
-    if (!isFormValid()) {
+    /* if (!isFormValid()) {
       alert("fill in the whole form !!");
       return;
-    }
+    } */
 
     let newBookList = [];
 
@@ -48,8 +49,8 @@ function NewBookForm() {
     }
     newBookList = [...booksData, newBook];
     setBooksData(newBookList);
-    alert("new book added!")
     clearForm();
+    setBookModal(true);
   }
 
   function clearForm() {

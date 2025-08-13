@@ -4,11 +4,9 @@ import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
 import NewBookForm from './NewBookForm';
 import BookPreview from './BookPreview';
-import { GlobalContext } from '../context/GlobalContext';
-import { useContext, useEffect } from 'react';
+import BookSubmissionModal from "./BookSubmissionModal";
 
 function Main() {
-  const {state} = useContext(GlobalContext)
   
   return (
     <main className="main flex-1 flex flex-col p-4 bg-slate-100">
@@ -43,6 +41,7 @@ function Main() {
       </div>
       <NewBookForm />
       <BookPreview />
+      <BookSubmissionModal />
     </main>
   )
 }
