@@ -4,11 +4,10 @@ import { GlobalContext } from "../context/GlobalContext";
 
 function CoverInput() {
   const [errMsg, setErrMsg] = useState("");
-  const {setCover} = useContext(GlobalContext)
+  const {setCover, previewUrl, setPreviewUrl} = useContext(GlobalContext)
 
   const [isDragging, setIsDragging] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState(null);
-
+  
   const fileInputRef = useRef(null); 
 
   /*  Cleanup effect: revokes the previous object URL to free memory 

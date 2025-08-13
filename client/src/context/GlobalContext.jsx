@@ -16,6 +16,8 @@ export const GlobalProvider = ({children}) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const [previewUrl, setPreviewUrl] = useState(null);
+
   const [booksData, setBooksData] = useState(() => {
     const stored = localStorage.getItem("booksData");
     return stored ? JSON.parse(stored) : bookList;
@@ -66,7 +68,7 @@ export const GlobalProvider = ({children}) => {
       booksData, setBooksData, 
       state, dispatch, setTitle, setAuthor,
       setCategories, removeCategory, setCover,
-      resetState}} >
+      resetState, previewUrl, setPreviewUrl}} >
       {children}
     </GlobalContext.Provider>
   )

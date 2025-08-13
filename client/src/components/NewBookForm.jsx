@@ -5,7 +5,7 @@ import { GlobalContext } from "../context/GlobalContext";
 function NewBookForm() {
   const {state, booksData, setBooksData, 
       setTitle, setAuthor, setCategories, 
-      removeCategory, resetState} = useContext(GlobalContext)
+      removeCategory, resetState, setPreviewUrl} = useContext(GlobalContext)
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   
@@ -29,8 +29,9 @@ function NewBookForm() {
     return state.title && state.author && state.categories.length > 0;
   }
 
-  function submitBook() {
-    if (!isFormValid) {
+  function submitBook(e) {
+    e.preventDefault();
+    if (!isFormValid()) {
       alert("fill in the whole form !!");
       return;
     }
@@ -46,8 +47,14 @@ function NewBookForm() {
     }
     newBookList = [...booksData, newBook];
     setBooksData(newBookList);
-    resetState();
     alert("new book added!")
+    clearForm();
+  }
+
+  function clearForm() {
+    resetState();
+    setTags([]);
+    setPreviewUrl(null);
   }
 
   return (
