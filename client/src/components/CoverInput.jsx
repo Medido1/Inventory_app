@@ -14,7 +14,7 @@ function CoverInput() {
   whenever previewUrl changes or the component unmounts */
   useEffect(() => { 
     return () => {
-      if (previewUrl){
+      if (previewUrl && previewUrl.startsWith('blob:')){
         URL.revokeObjectURL(previewUrl)
       }
     }
@@ -36,18 +36,25 @@ function CoverInput() {
   
     if (!isValidType || !isValidSize) {
       setErrMsg("Invalid file!! Please choose a JPG or PNG image under 600KB.");
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl); // Clean up old URL
+      if (previewUrl && previewUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl);
       }
       setPreviewUrl(null);
     } else {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl); // Clean up old URL
+      if (previewUrl && previewUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(previewUrl);
       }
-      const imageUrl = URL.createObjectURL(file);
-      setPreviewUrl(imageUrl);
-      setErrMsg("");
+      
+      // Create FileReader instance to convert file to base64
+      const reader = new FileReader(); 
+      reader.onload = (e) => { 
+        const base64 = e.target.result; //presists in localStorage
+        setPreviewUrl(base64)
+      }
+      reader.readAsDataURL(file)
+      setErrMsg("")
     }
+    
   };
 
   return (
