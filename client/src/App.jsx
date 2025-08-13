@@ -1,10 +1,13 @@
-import { useState } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Header from './components/Header';
 import MobileMenu from './components/MobileMenu';
 import Main from './components/Main';
+import LoadingFallBack from './components/LoadingFallBack';
+import NotFound from './components/NotFound';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallBack from './components/ErrorFallBack';
 
 const Books = lazy(() => import('./components/Books'));
 const Categories = lazy(() => import('./components/Categories'));
@@ -16,12 +19,17 @@ function App() {
       <div className='min-h-screen flex flex-col relative'>
         <Header />
         <MobileMenu />
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/books' element={<Books />}/>
-          <Route path='/categories' element={<Categories />}/>
-          <Route path='/categories/:categoryName' element={<BookByCategory />}/>
-        </Routes>
+        <ErrorBoundary  FallbackComponent = {ErrorFallBack}>
+          <Suspense fallback = {<LoadingFallBack />}>
+            <Routes>
+              <Route path='/' element={<Main />} />
+              <Route path='/books' element={<Books />}/>
+              <Route path='/categories' element={<Categories />}/>
+              <Route path='/categories/:categoryName' element={<BookByCategory />}/>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </div>
       
     </Router>
