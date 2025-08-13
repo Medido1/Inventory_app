@@ -3,11 +3,11 @@ import { GlobalContext } from "../context/GlobalContext";
 import emptyCoverIcon from '../assets/question-sign.png';
 
 function BookPreview() {
-  const {state} = useContext(GlobalContext)
+  const {state, previewUrl} = useContext(GlobalContext)
   
   return (
     <div className="bg-slate-300 p-4  mt-4 rounded-md flex">
-      {!state.cover ? 
+      {!previewUrl ? 
         <div className="border-2 border-dashed p-4 flex flex-col
           items-center justify-center max-w-[50%] text-center h-[180px]">
           <img 
@@ -16,7 +16,7 @@ function BookPreview() {
           <p>No Cover provided ! </p>
         </div>
         :
-        <img className="h-[160px]" src={state.cover} alt={`${state.title} cover`}/>
+        <img className="h-[160px]" src={previewUrl} alt={`${state.title} cover`}/>
       } 
       <div>
       <div className="ml-2 text-center flex-1">

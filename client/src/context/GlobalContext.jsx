@@ -52,12 +52,6 @@ export const GlobalProvider = ({children}) => {
     })
   }
 
-  function setCover(cover) {
-    dispatch ({
-      type: "SET_COVER", payload: cover
-    })
-  }
-  
   function resetState() {
     dispatch({type:"RESET_STATE"})
   }
@@ -67,7 +61,7 @@ export const GlobalProvider = ({children}) => {
       isMenuOpen, setIsMenuOpen, 
       booksData, setBooksData, 
       state, dispatch, setTitle, setAuthor,
-      setCategories, removeCategory, setCover,
+      setCategories, removeCategory,
       resetState, previewUrl, setPreviewUrl}} >
       {children}
     </GlobalContext.Provider>

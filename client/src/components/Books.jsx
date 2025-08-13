@@ -6,9 +6,6 @@ import BookCard from './BookCard';
 function Books() {
   const {booksData} = useContext(GlobalContext);
 
-  useEffect(() => {
-    console.log(booksData)
-  }, [])
   return (
     <div className="p-4">
       <div className='flex items-center gap-4 mb-4'>

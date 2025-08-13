@@ -5,7 +5,8 @@ import { GlobalContext } from "../context/GlobalContext";
 function NewBookForm() {
   const {state, booksData, setBooksData, 
       setTitle, setAuthor, setCategories, 
-      removeCategory, resetState, setPreviewUrl} = useContext(GlobalContext)
+      removeCategory, resetState, setPreviewUrl,
+      previewUrl} = useContext(GlobalContext)
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   
@@ -43,7 +44,7 @@ function NewBookForm() {
       title: state.title,
       author: state.author,
       categories: state.categories,
-      cover: state.cover
+      cover: previewUrl ?? "",
     }
     newBookList = [...booksData, newBook];
     setBooksData(newBookList);

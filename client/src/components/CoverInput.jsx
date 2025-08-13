@@ -4,7 +4,7 @@ import { GlobalContext } from "../context/GlobalContext";
 
 function CoverInput() {
   const [errMsg, setErrMsg] = useState("");
-  const {setCover, previewUrl, setPreviewUrl} = useContext(GlobalContext)
+  const {previewUrl, setPreviewUrl} = useContext(GlobalContext)
 
   const [isDragging, setIsDragging] = useState(false);
   
@@ -18,7 +18,7 @@ function CoverInput() {
         URL.revokeObjectURL(previewUrl)
       }
     }
-  }, [previewUrl])
+  }, [])
 
   const verifyFileValidity = (e) => {
     const file = e.target.files[0];
@@ -36,11 +36,16 @@ function CoverInput() {
   
     if (!isValidType || !isValidSize) {
       setErrMsg("Invalid file!! Please choose a JPG or PNG image under 600KB.");
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl); // Clean up old URL
+      }
       setPreviewUrl(null);
     } else {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl); // Clean up old URL
+      }
       const imageUrl = URL.createObjectURL(file);
       setPreviewUrl(imageUrl);
-      setCover(imageUrl)
       setErrMsg("");
     }
   };
@@ -77,7 +82,6 @@ function CoverInput() {
                 className="bg-red-200 p-2 rounded-md"
                 onClick={() => {
                   setPreviewUrl(null)
-                  setCover(null)
                 }}
               >
                 Remove
