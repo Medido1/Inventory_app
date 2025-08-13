@@ -14,13 +14,18 @@ function BookByCategory() {
       <h2 className='text-center text-2xl text-black font-bold mb-4'>
         {categoryName}
       </h2>
-      <ul>
+      {filterdBooks.length > 0 ? 
+      (
+        <ul className='sm:grid sm:grid-cols-2 md:grid-cols-3'>
         {filterdBooks.map((book) => 
           <li key={book.id}>
             <BookCard book = {book}/>
           </li>
         )}
       </ul>
+      ) :
+      <p className='text-center'> No books added yet:(</p>
+      }
       {showForm && 
         <div>
           <div className='fixed inset-0 bg-black/75 z-10 p-4 '></div>

@@ -13,13 +13,17 @@ function Books() {
         <img src={viewIcon} alt="icon" className='h-10' />
         <h1 className="text-2xl text-center">My Books</h1>
       </div>
-      <ul>
-        {booksData.map((book) => 
-          <li key={book.id}>
-            <BookCard book = {book}/>
-          </li>
-        )}
-      </ul>
+      {booksData.length > 0 ? 
+        (<ul className='sm:grid sm:grid-cols-2'>
+          {booksData.map((book) => 
+            <li key={book.id}>
+              <BookCard book = {book}/>
+            </li>
+          )}
+        </ul>)
+        :
+        <p className='text-center'>No Books added yet :(</p>
+      }
       {showForm && 
         <div>
           <div className='fixed inset-0 bg-black/75 z-10 p-4 '></div>

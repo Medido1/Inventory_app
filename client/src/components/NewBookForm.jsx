@@ -99,9 +99,8 @@ function NewBookForm() {
 
   return (
     <form 
-      
       action="" className='p-4 shadow-lg rounded-lg mt-4 bg-white
-      flex flex-col items-center gap-4'>
+      flex flex-col items-center gap-4 max-w-[400px] mx-auto'>
       <p className='text-xl font-bold'>Add a new book!</p>
       <div className='flex items-center gap-2 text-lg'>
         <label htmlFor="title" className='w-[22%]'>Title :</label>

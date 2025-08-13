@@ -19,6 +19,7 @@ export const GlobalProvider = ({children}) => {
   const [isBookModal, setBookModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [currentBook, setCurrentBook] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 640);
 
   const [booksData, setBooksData] = useState(() => {
     const stored = localStorage.getItem("booksData");
@@ -66,7 +67,8 @@ export const GlobalProvider = ({children}) => {
       setCategories, removeCategory,
       resetState, previewUrl, setPreviewUrl,
       isBookModal, setBookModal, showForm,
-      setShowForm, currentBook, setCurrentBook}} >
+      setShowForm, currentBook, setCurrentBook,
+      isMobile, setIsMobile}} >
       {children}
     </GlobalContext.Provider>
   )
