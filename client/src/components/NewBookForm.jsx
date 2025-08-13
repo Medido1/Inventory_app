@@ -11,7 +11,7 @@ function NewBookForm() {
 
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  
+
   const handleKeyDown = (e) => {
     if ((e.key === "Enter") && inputValue.trim() !=="") {
       e.preventDefault();
@@ -29,7 +29,7 @@ function NewBookForm() {
   };
 
   function isFormValid() {
-    return state.title && state.author && state.categories.length > 0;
+    return state.title && state.author;
   }
 
   function submitBook(e) {
@@ -69,14 +69,33 @@ function NewBookForm() {
       setTitle(currentBook.title)
       setAuthor(currentBook.author)
       setTags(currentBook.categories)
+      setCategories(currentBook.categories)
     }
   }, [currentBook])
 
+  function updateBook() {
+    if (!isFormValid()){
+      alert("fill in the whole form !!");
+      return;
+    }
 
+    const updatedData = booksData.map(book => {
+      return book.id === currentBook.id ? 
+      {...book,
+        title: state.title,
+        author: state.author,
+        categories: state.categories,
+      }
+      : book;
+    })
+    setBooksData(updatedData);
+    setShowForm(false);
+    resetState();
+  }
 
   return (
     <form 
-      onSubmit={submitBook}
+      
       action="" className='p-4 shadow-lg rounded-lg mt-4 bg-white
       flex flex-col items-center gap-4'>
       <p className='text-xl font-bold'>Add a new book!</p>
@@ -129,12 +148,16 @@ function NewBookForm() {
       {!currentBook ? 
         (<button 
           className="bg-gray-200 p-2 rounded-md"
+          onClick={submitBook}
           >
           Submit
         </button>)
         : 
         (<div className="flex gap-2">
-          <button className="px-4 py-2 bg-green-200 rounded-md">
+          <button
+            type="submit" 
+            onClick={updateBook}
+            className="px-4 py-2 bg-green-200 rounded-md">
             Save
           </button>
           <button 
