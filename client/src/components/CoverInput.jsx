@@ -61,6 +61,9 @@ function CoverInput() {
     if (currentBook) {
       setPreviewUrl(currentBook.cover)
     }
+    else {
+      setPreviewUrl(null)
+    }
   }, [currentBook])
 
   return (

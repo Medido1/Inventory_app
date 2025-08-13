@@ -7,7 +7,7 @@ function NewBookForm() {
       setTitle, setAuthor, setCategories, 
       removeCategory, resetState, setPreviewUrl,
       previewUrl, setBookModal, currentBook,
-      setShowForm} = useContext(GlobalContext)
+      setShowForm, setCurrentBook} = useContext(GlobalContext)
 
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -70,6 +70,9 @@ function NewBookForm() {
       setAuthor(currentBook.author)
       setTags(currentBook.categories)
       setCategories(currentBook.categories)
+    }
+    else {
+      resetState();
     }
   }, [currentBook])
 
@@ -162,7 +165,10 @@ function NewBookForm() {
             Save
           </button>
           <button 
-            onClick={() => setShowForm(false)}
+            onClick={() => {
+              setShowForm(false)
+              setCurrentBook(null);
+            }}
             className="px-4 py-2 bg-gray-200 rounded-md">
             Cancel
           </button>
