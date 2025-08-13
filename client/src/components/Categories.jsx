@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
+import NewBookForm from './NewBookForm';
 
 function Categories() {
   const [categoriesList, setCategoriesList] = useState([]);

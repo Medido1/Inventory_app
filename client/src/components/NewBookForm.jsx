@@ -85,6 +85,7 @@ function NewBookForm() {
         title: state.title,
         author: state.author,
         categories: state.categories,
+        cover:previewUrl
       }
       : book;
     })

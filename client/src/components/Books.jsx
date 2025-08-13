@@ -25,9 +25,7 @@ function Books() {
           <div className='fixed inset-0 bg-black/75 z-10 p-4 '></div>
           <div className='absolute p-4 top-10 rounded-2xl z-20'>
             <NewBookForm currentBook = {currentBook}/>
-          </div>
-          
-          
+          </div>  
         </div>
       }
     </div>

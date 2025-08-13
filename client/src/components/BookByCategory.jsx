@@ -2,9 +2,10 @@ import { useParams } from 'react-router-dom'; /* access URL parameters defined i
 import { GlobalContext } from '../context/GlobalContext';
 import BookCard from './BookCard';
 import { useContext } from 'react';
+import NewBookForm from './NewBookForm';
 
 function BookByCategory() {
-  const {booksData} = useContext(GlobalContext);
+  const {booksData, showForm, currentBook} = useContext(GlobalContext);
   const { categoryName } = useParams(); //get category name from url
   const filterdBooks = booksData.filter(book => book.categories.includes(categoryName))
 
@@ -20,6 +21,14 @@ function BookByCategory() {
           </li>
         )}
       </ul>
+      {showForm && 
+        <div>
+          <div className='fixed inset-0 bg-black/75 z-10 p-4 '></div>
+          <div className='absolute p-4 top-10 rounded-2xl z-20'>
+            <NewBookForm currentBook = {currentBook}/>
+          </div>  
+        </div>
+      }
     </div>
   )
 }
