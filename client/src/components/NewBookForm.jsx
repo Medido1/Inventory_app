@@ -33,10 +33,10 @@ function NewBookForm() {
 
   function submitBook(e) {
     e.preventDefault();
-    /* if (!isFormValid()) {
+    if (!isFormValid()) {
       alert("fill in the whole form !!");
       return;
-    } */
+    }
 
     let newBookList = [];
 
