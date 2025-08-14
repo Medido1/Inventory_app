@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import verifiedIcon from "../assets/verified.gif";  
 import { Link } from "react-router-dom";
@@ -8,6 +8,16 @@ function BookSubmissionModal() {
   const {isBookModal, setBookModal} = useContext(GlobalContext);
   if (!isBookModal) return;
 
+  // Close on Escape
+  useEffect(() => {
+    if (!isBookModal) return;
+    function onKey(e) {
+      if (e.key === "Escape") setBookModal(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isBookModal, setBookModal]);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -15,11 +25,13 @@ function BookSubmissionModal() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 bg-black/75 z-10 p-4 flex items-center justify-center "
+        role="dialog"
+        aria-modal="true"
       >
         <div className="flex flex-col items-center justify-center bg-white p-4 rounded-lg
           w-full top-1/2 left-1/2 sm:max-w-[500px] ">
           <div className="flex items-center">
-            <img className="h-10" src={verifiedIcon} alt="verified icon" />
+            <img className="h-10" src={verifiedIcon} alt="verified icon" aria-hidden="true" />
             <p>New Book added!!</p>
           </div>
           <div className="flex gap-4 mt-4">
