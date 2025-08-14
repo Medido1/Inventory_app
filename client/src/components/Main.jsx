@@ -24,12 +24,12 @@ function Main() {
           </p>
           <img
             className='h-10 mx-auto'
-            src={introIcon} alt="icon" />
+            src={introIcon} alt="icon" aria-hidden="true" />
         </div>
         <div>
           <div className='p-4 shadow-lg rounded-lg mt-4 bg-white
             flex justify-center items-center gap-4'>
-            <img src={viewIcon} alt="icon" className='h-10' />
+            <img src={viewIcon} alt="icon" aria-hidden="true" className='h-10' />
             <Link
               to={'/books'}
               className='text-xl text-center'>
@@ -38,7 +38,7 @@ function Main() {
           </div>
           <div className='p-4 shadow-lg rounded-lg mt-4 bg-white
             flex justify-center items-center gap-4'>
-            <img src={categoriesIcon} alt="icon" className='h-10' />
+            <img src={categoriesIcon} alt="icon" aria-hidden="true" className='h-10' />
             <Link
               to={'/categories'}
               className='text-xl text-center'>
