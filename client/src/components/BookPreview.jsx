@@ -25,7 +25,7 @@ function BookPreview() {
         </h2>
         <p>{state.author}</p>
         <ul className="text-blue-400 flex flex-col">
-          {state.categories.map((category) =>
+          {state.categories?.map((category) =>
             <li
               key={category}>
               {category}
