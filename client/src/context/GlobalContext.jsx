@@ -1,13 +1,7 @@
 import {createContext, useEffect, useState, useReducer, useMemo } from "react";
 import bookList from '../data/books';
 import AppReducer from "./AppReducer";
-
-export const initialState = {
-  cover: "",
-  title: "",
-  author: "",
-  categories: [],
-}
+import { initialState } from "./state";
 
 export const GlobalContext = createContext();
 

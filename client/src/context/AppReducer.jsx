@@ -1,4 +1,4 @@
-import { initialState } from "./GlobalContext";
+import { initialState } from "./state";
 
 function AppReducer(state, action) {
   switch (action.type) {

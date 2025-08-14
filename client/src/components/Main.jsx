@@ -48,12 +48,13 @@ function Main() {
         </div>
       </div>
       
-      {(!isMobile && showNewBookForm) || (isMobile && !showNewBookForm) && 
-        <div className='md:flex '>
+      {(showNewBookForm !== isMobile) && (
+        <div className="md:flex">
           <NewBookForm />
           <BookPreview />
         </div>
-      }
+      )}
+
       {!isMobile && !showNewBookForm && 
         <button 
           onClick={() => setShowNewBookForm(true)}
