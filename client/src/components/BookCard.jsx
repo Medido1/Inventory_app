@@ -7,7 +7,7 @@ function BookCard({book}) {
   const {booksData, setBooksData, setShowForm,
     setCurrentBook} = useContext(GlobalContext)
 
-  function DeleteBook(id) {
+  function deleteBook(id) {
     if (
       window.confirm("Are you sure you want to delete this book ?")
     ) {
@@ -16,7 +16,7 @@ function BookCard({book}) {
     }
   }
 
-  function EditBook(id) {
+  function editBook(id) {
     setShowForm(true)
     const targetBook = booksData.find((book) => book.id === id);
     setCurrentBook(targetBook)
@@ -40,7 +40,7 @@ function BookCard({book}) {
           <h2 className="text-2xl">{book.title}</h2>
           <p>{book.author}</p>
           <ul className="text-blue-500 flex flex-col">
-            {book.categories.map((category) =>
+            {book.categories?.map((category) =>
               <Link
                 to={`/categories/${category}`}
                 key={category}>
@@ -52,13 +52,16 @@ function BookCard({book}) {
       </div>
       <div className="flex justify-center gap-4 mt-4">
         <button 
-          onClick={() => EditBook(book.id)}
-          className="bg-green-200 px-4 py-2 rounded-lg cursor-pointer">
+          onClick={() => editBook(book.id)}
+          className="bg-green-200 px-4 py-2 rounded-lg cursor-pointer"
+          aria-label="edit book"
+          >
           Edit
         </button>
         <button
-          onClick={() => DeleteBook(book.id)}
+          onClick={() => deleteBook(book.id)}
           className="bg-red-200 px-4 py-2 rounded-lg cursor-pointer"
+          aria-label="delte book"
         >
           Delete
         </button>
