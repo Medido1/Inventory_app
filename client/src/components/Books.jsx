@@ -5,16 +5,16 @@ import BookCard from './BookCard';
 import NewBookForm from './NewBookForm';
 
 function Books() {
-  const {booksData, showForm, currentBook} = useContext(GlobalContext);
+  const {booksData = [], showForm, currentBook} = useContext(GlobalContext);
 
   return (
     <div className="p-4">
       <div className='flex items-center gap-4 mb-4'>
-        <img src={viewIcon} alt="icon" className='h-10' />
+        <img src={viewIcon} alt="icon" className='h-10' aria-label='hidden' />
         <h1 className="text-2xl text-center">My Books</h1>
       </div>
       {booksData.length > 0 ? 
-        (<ul className='sm:grid sm:grid-cols-2'>
+        (<ul className='sm:grid sm:gap-2 sm:grid-cols-2'>
           {booksData.map((book) => 
             <li key={book.id}>
               <BookCard book = {book}/>
