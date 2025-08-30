@@ -1,13 +1,16 @@
 import { useContext, useEffect, useState} from "react";
 import CoverInput from './CoverInput';
 import { GlobalContext } from "../context/GlobalContext";
+import { AppStateContext } from "../context/AppStateContext";
 
 function NewBookForm() {
-  const {state, booksData, setBooksData, 
-      setTitle, setAuthor, setCategories, 
-      removeCategory, resetState, setPreviewUrl,
-      previewUrl, setBookModal, currentBook,
+  const {booksData, setBooksData, 
+      setPreviewUrl, previewUrl, setBookModal, currentBook,
       setShowForm, setCurrentBook} = useContext(GlobalContext)
+
+  const {state, setTitle, 
+        setAuthor, setCategories, 
+        resetState, removeCategory} = useContext(AppStateContext)
 
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
@@ -93,6 +96,8 @@ function NewBookForm() {
       : book;
     })
     setBooksData(updatedData);
+
+    setCurrentBook(null)
     setShowForm(false);
     resetState();
   }
