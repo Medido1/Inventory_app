@@ -1,12 +1,10 @@
 import {createContext, useEffect, useState, useReducer, useMemo } from "react";
 import bookList from '../data/books';
-import AppReducer from "./AppReducer";
-import { initialState } from "./state";
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({children}) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -49,35 +47,6 @@ export const GlobalProvider = ({children}) => {
     localStorage.setItem("booksData", JSON.stringify(booksData))
   }, [booksData])
 
-  /* fill up new book info */
-  function setTitle(title) {
-    dispatch({
-      type:  "SET_TITLE", payload: title
-    })
-  }
-
-  function setAuthor(author) {
-    dispatch({
-      type: "SET_AUTHOR", payload: author
-    })
-  }
-
-  function setCategories(category) {
-    dispatch({
-      type: "SET_CATEGORY", payload: category
-    })
-  }
-
-  function removeCategory(category) {
-    dispatch ({
-      type: "REMOVE_CATEGORY", payload: category
-    })
-  }
-
-  function resetState() {
-    dispatch({type:"RESET_STATE"})
-  }
-
   // Memoize context value to keep the object reference stable between renders.
   // This prevents all consumers from re-rendering unnecessarily whenever
   // GlobalProvider re-renders, unless one of the listed dependencies actually changes.
@@ -85,10 +54,8 @@ export const GlobalProvider = ({children}) => {
     () => ({
       isMenuOpen, setIsMenuOpen, 
       booksData, setBooksData,
-      state, dispatch,
-      setTitle, setAuthor,
-      setCategories, removeCategory,
-      resetState, previewUrl, 
+      
+      previewUrl, 
       setPreviewUrl, isBookModal,
       setBookModal, showForm,
       setShowForm, currentBook,
@@ -96,7 +63,7 @@ export const GlobalProvider = ({children}) => {
     }),
     [
       isMenuOpen, booksData,
-      state, previewUrl,
+      previewUrl,
       isBookModal, showForm, 
       currentBook, isMobile
     ]

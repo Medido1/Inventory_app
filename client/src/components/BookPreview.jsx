@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
+import { AppStateContext } from "../context/AppStateContext";
 import emptyCoverIcon from '../assets/question-sign.png';
 
 function BookPreview() {
-  const {state, previewUrl} = useContext(GlobalContext)
+  const {previewUrl} = useContext(GlobalContext)
+  const {state} = useContext(AppStateContext)
   
   return (
     <div className="bg-slate-300 p-4 mt-4 rounded-md flex sm:mx-auto sm:min-w-[380px]
