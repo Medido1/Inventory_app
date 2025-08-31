@@ -7,6 +7,8 @@ export const AppStateContext = createContext();
 export const AppStateProvider = ({children}) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  const [currentBook, setCurrentBook] = useState(null);
+
   // Reducer action helpers 
   const setTitle = (title) => dispatch({type: "SET_TITLE", payload: title});
   const setAuthor = (author) => dispatch({type: "SET_AUTHOR", payload: author});
@@ -15,8 +17,10 @@ export const AppStateProvider = ({children}) => {
   const resetState = () => dispatch({type: "RESET_STATE"});
 
   const value = useMemo(
-    () => ({state, dispatch, setTitle, setAuthor, setCategories, removeCategory, resetState}),
-    [state]
+    () => ({state, dispatch, setTitle,
+            setAuthor, setCategories, removeCategory,
+            resetState, currentBook, setCurrentBook}),
+    [state, currentBook]
   )
 
   return <AppStateContext.Provider value={value}>{children}</AppStateContext.Provider>

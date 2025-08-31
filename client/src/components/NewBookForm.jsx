@@ -6,14 +6,14 @@ import { AppStateContext } from "../context/AppStateContext";
 
 function NewBookForm() {
   const { setPreviewUrl, previewUrl, 
-          setBookModal, currentBook,
-          setShowForm, setCurrentBook} = useContext(GlobalContext)
+          setBookModal, setShowForm} = useContext(GlobalContext)
 
   const {booksData, setBooksData} = useContext(BooksContext)
 
   const {state, setTitle, 
         setAuthor, setCategories, 
-        resetState, removeCategory} = useContext(AppStateContext)
+        resetState, removeCategory,
+        currentBook, setCurrentBook} = useContext(AppStateContext)
 
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");

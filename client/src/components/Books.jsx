@@ -4,10 +4,12 @@ import {GlobalContext} from '../context/GlobalContext';
 import { BooksContext } from '../context/BooksContext';
 import BookCard from './BookCard';
 import NewBookForm from './NewBookForm';
+import { AppStateContext } from '../context/AppStateContext';
 
 function Books() {
-  const {showForm, currentBook} = useContext(GlobalContext);
+  const {showForm} = useContext(GlobalContext);
   const {booksData = []} = useContext(BooksContext)
+  const {currentBook} = useContext(AppStateContext)
 
   return (
     <div className="p-4">

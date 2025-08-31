@@ -1,10 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import uploadIcon from '../assets/upload.png';
 import { GlobalContext } from "../context/GlobalContext";
+import { AppStateContext } from "../context/AppStateContext";
 
 function CoverInput() {
   const [errMsg, setErrMsg] = useState("");
-  const {previewUrl, setPreviewUrl, currentBook} = useContext(GlobalContext)
+  const {previewUrl, setPreviewUrl} = useContext(GlobalContext)
+  const {currentBook} = useContext(AppStateContext)
 
   const [isDragging, setIsDragging] = useState(false);
   

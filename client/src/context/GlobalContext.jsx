@@ -8,7 +8,7 @@ export const GlobalProvider = ({children}) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isBookModal, setBookModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [currentBook, setCurrentBook] = useState(null);
+  
 
 
   // SSR-safe mobile detection: prevents window access crashes during server-side rendering
@@ -39,13 +39,12 @@ export const GlobalProvider = ({children}) => {
       previewUrl, 
       setPreviewUrl, isBookModal,
       setBookModal, showForm,
-      setShowForm, currentBook,
-      setCurrentBook,isMobile,
+      setShowForm, isMobile,
     }),
     [
       isMenuOpen,previewUrl,
       isBookModal, showForm, 
-      currentBook, isMobile
+      isMobile
     ]
   )
 
