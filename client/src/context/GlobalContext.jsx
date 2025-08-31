@@ -1,11 +1,9 @@
 import {createContext, useEffect, useState, useReducer, useMemo } from "react";
-import bookList from '../data/books';
+
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({children}) => {
-
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [isBookModal, setBookModal] = useState(false);
@@ -32,29 +30,12 @@ export const GlobalProvider = ({children}) => {
     };
   }, []);
 
-  const [booksData, setBooksData] = useState(() => {
-    try {
-      const stored = localStorage.getItem("booksData");
-      return stored ? JSON.parse(stored) : bookList;
-    } catch (error) {
-      console.warn("Failed to parse stored books data:", error);
-      return bookList;
-    }
-  })
-
-
-  useEffect(() => {
-    localStorage.setItem("booksData", JSON.stringify(booksData))
-  }, [booksData])
-
   // Memoize context value to keep the object reference stable between renders.
   // This prevents all consumers from re-rendering unnecessarily whenever
   // GlobalProvider re-renders, unless one of the listed dependencies actually changes.
   const value = useMemo(
     () => ({
       isMenuOpen, setIsMenuOpen, 
-      booksData, setBooksData,
-      
       previewUrl, 
       setPreviewUrl, isBookModal,
       setBookModal, showForm,
@@ -62,8 +43,7 @@ export const GlobalProvider = ({children}) => {
       setCurrentBook,isMobile,
     }),
     [
-      isMenuOpen, booksData,
-      previewUrl,
+      isMenuOpen,previewUrl,
       isBookModal, showForm, 
       currentBook, isMobile
     ]

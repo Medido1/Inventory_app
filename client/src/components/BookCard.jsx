@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import emptyCoverIcon from '../assets/question-sign.png';
 import { GlobalContext } from "../context/GlobalContext";
+import { BooksContext } from "../context/BooksContext";
 import { useContext } from "react";
 
 function BookCard({book}) {
-  const {booksData, setBooksData, setShowForm,
-    setCurrentBook} = useContext(GlobalContext)
+  const {setShowForm, setCurrentBook} = useContext(GlobalContext)
+  const {booksData, setBooksData} = useContext(BooksContext)
 
   function deleteBook(id) {
     if (

@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import viewIcon from '../assets/viewbooks.gif';
 import {GlobalContext} from '../context/GlobalContext';
+import { BooksContext } from '../context/BooksContext';
 import BookCard from './BookCard';
 import NewBookForm from './NewBookForm';
 
 function Books() {
-  const {booksData = [], showForm, currentBook} = useContext(GlobalContext);
+  const {showForm, currentBook} = useContext(GlobalContext);
+  const {booksData = []} = useContext(BooksContext)
 
   return (
     <div className="p-4">

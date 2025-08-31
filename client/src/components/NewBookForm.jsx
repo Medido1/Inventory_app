@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState} from "react";
 import CoverInput from './CoverInput';
 import { GlobalContext } from "../context/GlobalContext";
+import { BooksContext } from "../context/BooksContext";
 import { AppStateContext } from "../context/AppStateContext";
 
 function NewBookForm() {
-  const {booksData, setBooksData, 
-      setPreviewUrl, previewUrl, setBookModal, currentBook,
-      setShowForm, setCurrentBook} = useContext(GlobalContext)
+  const { setPreviewUrl, previewUrl, 
+          setBookModal, currentBook,
+          setShowForm, setCurrentBook} = useContext(GlobalContext)
+
+  const {booksData, setBooksData} = useContext(BooksContext)
 
   const {state, setTitle, 
         setAuthor, setCategories, 

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
+import { BooksContext } from '../context/BooksContext';
 import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
 
 function Categories() {
   const [categoriesList, setCategoriesList] = useState([]);
-  const {booksData} = useContext(GlobalContext);
+  const {booksData} = useContext(BooksContext);
 
   useEffect(() => {
     const uniqueCategories = [];
