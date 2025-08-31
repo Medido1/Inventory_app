@@ -1,16 +1,14 @@
-import {createContext, useEffect, useState, useReducer, useMemo } from "react";
+import {createContext, useEffect, useState, useMemo } from "react";
 
 
-export const GlobalContext = createContext();
+export const UIContext = createContext();
 
-export const GlobalProvider = ({children}) => {
+export const UIProvider = ({children}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [isBookModal, setBookModal] = useState(false);
+  const [isBookModalOpen, setBookModalOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
   
-
-
   // SSR-safe mobile detection: prevents window access crashes during server-side rendering
   const getIsMobile = () =>
     typeof window !== 'undefined' ? window.innerWidth <= 640 : false;
@@ -19,7 +17,7 @@ export const GlobalProvider = ({children}) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(getIsMobile);
+      setIsMobile(getIsMobile());
     };
 
     handleResize(); // optional, ensures the initial state is accurate
@@ -32,25 +30,25 @@ export const GlobalProvider = ({children}) => {
 
   // Memoize context value to keep the object reference stable between renders.
   // This prevents all consumers from re-rendering unnecessarily whenever
-  // GlobalProvider re-renders, unless one of the listed dependencies actually changes.
+  // UI re-renders, unless one of the listed dependencies actually changes.
   const value = useMemo(
     () => ({
       isMenuOpen, setIsMenuOpen, 
-      previewUrl, 
-      setPreviewUrl, isBookModal,
-      setBookModal, showForm,
-      setShowForm, isMobile,
+      previewUrl, setPreviewUrl, 
+      isBookModalOpen, setBookModalOpen,
+      showForm, setShowForm,
+      isMobile,
     }),
     [
       isMenuOpen,previewUrl,
-      isBookModal, showForm, 
+      isBookModalOpen, showForm, 
       isMobile
     ]
   )
 
   return (
-    <GlobalContext.Provider value={value} >
+    <UIContext.Provider value={value} >
       {children}
-    </GlobalContext.Provider>
+    </UIContext.Provider>
   )
 }

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import NewBookForm from './NewBookForm';
 import BookPreview from './BookPreview';
 import BookSubmissionModal from "./BookSubmissionModal";
-import { GlobalContext } from '../context/GlobalContext';
+import { UIContext } from '../context/UIContext';
 import { useContext, useState } from 'react';
 
 function Main() {
-  const {isMobile} = useContext(GlobalContext)
+  const {isMobile} = useContext(UIContext)
   const [showNewBookForm, setShowNewBookForm] = useState(false);
 
   return (

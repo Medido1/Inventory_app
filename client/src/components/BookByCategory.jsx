@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'; /* access URL parameters defined in route paths. */
-import { GlobalContext } from '../context/GlobalContext';
+import { UIContext } from '../context/UIContext';
 import { BooksContext } from '../context/BooksContext';
 import { AppStateContext } from '../context/AppStateContext';
 import BookCard from './BookCard';
@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import NewBookForm from './NewBookForm';
 
 function BookByCategory() {
-  const {showForm} = useContext(GlobalContext);
+  const {showForm} = useContext(UIContext);
   const {booksData} = useContext(BooksContext);
   const {currentBook} = useContext(AppStateContext)
   const { categoryName } = useParams(); //get category name from url

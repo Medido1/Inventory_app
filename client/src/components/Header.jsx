@@ -1,12 +1,12 @@
 import logo from '../assets/book.png';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
+import { UIContext } from '../context/UIContext';
 import NavMenuDesk from './NavMenuDesk';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const {isMobile, setIsMenuOpen, isMenuOpen} = useContext(GlobalContext)
+  const {isMobile, setIsMenuOpen, isMenuOpen} = useContext(UIContext)
   return (
     <header className='header p-6 flex justify-between items-center'>
       <Link to="/">

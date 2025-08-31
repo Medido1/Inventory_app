@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import { UIContext } from "../context/UIContext";
 import { AppStateContext } from "../context/AppStateContext";
 import emptyCoverIcon from '../assets/question-sign.png';
 
 function BookPreview() {
-  const {previewUrl} = useContext(GlobalContext)
+  const {previewUrl} = useContext(UIContext)
   const {state} = useContext(AppStateContext)
   
   return (

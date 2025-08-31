@@ -1,22 +1,22 @@
 import { useContext, useEffect } from "react";
-import { GlobalContext } from "../context/GlobalContext";
+import { UIContext } from "../context/UIContext";
 import verifiedIcon from "../assets/verified.gif";  
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 function BookSubmissionModal() {
-  const {isBookModal, setBookModal} = useContext(GlobalContext);
-  if (!isBookModal) return;
+  const {isBookModalOpen, setBookModalOpen} = useContext(UIContext);
+  if (!isBookModalOpen) return;
 
   // Close on Escape
   useEffect(() => {
-    if (!isBookModal) return;
+    if (!isBookModalOpen) return;
     function onKey(e) {
-      if (e.key === "Escape") setBookModal(false);
+      if (e.key === "Escape") setBookModalOpen(false);
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [isBookModal, setBookModal]);
+  }, [isBookModalOpen, setBookModalOpen]);
 
   return (
     <AnimatePresence>
@@ -36,12 +36,12 @@ function BookSubmissionModal() {
           </div>
           <div className="flex gap-4 mt-4">
             <button
-              onClick={() => setBookModal(false)}
+              onClick={() => setBookModalOpen(false)}
               className="bg-gray-200 px-4 py-2 rounded-lg">
               Add new Book
             </button>
             <Link
-              onClick={() => setBookModal(false)}
+              onClick={() => setBookModalOpen(false)}
               to = "/books"
               className="bg-gray-200 px-4 py-2 rounded-lg">
               View Books

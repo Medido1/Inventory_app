@@ -1,11 +1,11 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { GlobalContext } from "../context/GlobalContext";
+import { UIContext } from "../context/UIContext";
 import { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import closeIcon from '../assets/close.png';
 
 function MobileMenu() {
-  const {isMenuOpen, setIsMenuOpen} = useContext(GlobalContext)
+  const {isMenuOpen, setIsMenuOpen} = useContext(UIContext)
   const menuRef = useRef(null)
 
   useEffect(() => {
