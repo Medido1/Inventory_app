@@ -6,8 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function BookSubmissionModal() {
   const {isBookModalOpen, setBookModalOpen} = useContext(UIContext);
-  if (!isBookModalOpen) return;
-
+  
   // Close on Escape
   useEffect(() => {
     if (!isBookModalOpen) return;
@@ -17,6 +16,8 @@ function BookSubmissionModal() {
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [isBookModalOpen, setBookModalOpen]);
+
+  if (!isBookModalOpen) return null;
 
   return (
     <AnimatePresence>
