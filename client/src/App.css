@@ -4,10 +4,6 @@
   background: linear-gradient(to right, #0f172a, #334155);
 }
 
-.hidden {
-  display: none;
-}
-
 /* loding style */
 .spinner {
   position: absolute;

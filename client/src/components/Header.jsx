@@ -6,7 +6,7 @@ import NavMenuDesk from './NavMenuDesk';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const {isMobile, setIsMenuOpen, isMenuOpen} = useContext(UIContext)
+  const {setIsMenuOpen, isMenuOpen} = useContext(UIContext)
   return (
     <header className='header p-6 flex justify-between items-center'>
       <Link to="/">
@@ -15,15 +15,19 @@ function Header() {
           src={logo} alt="Home"
         />
       </Link>
-      {isMobile && 
-        <button 
-          aria-label="Open menu"
-          aria-expanded= {isMenuOpen} 
-          onClick={() => setIsMenuOpen(prev => !prev)}>
-          <RxHamburgerMenu className="text-white text-3xl"/>
-        </button>
-      }
-      {!isMobile && <NavMenuDesk />}
+
+      <nav className="hidden sm:flex gap-4">
+        <NavMenuDesk />
+      </nav>
+
+      <button 
+        className="md:hidden"
+        aria-label="Open menu"
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen(prev => !prev)}
+      >
+        <RxHamburgerMenu className="text-white text-3xl" />
+      </button>
     </header>
   )
 }

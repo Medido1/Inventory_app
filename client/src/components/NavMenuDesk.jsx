@@ -10,7 +10,7 @@ function NavMenuDesk() {
   ];
   
   return (
-    <nav className="flex gap-4">
+    <nav className="flex gap-4" aria-label="Main navigation">
       {navItems.map(({label, path}) => 
         <Link
           className="text-white text-xl cursor-pointer 
