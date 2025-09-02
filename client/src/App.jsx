@@ -4,7 +4,7 @@ import { lazy, Suspense } from 'react';
 import Header from './components/Header';
 import MobileMenu from './components/MobileMenu';
 import Main from './components/Main';
-import LoadingFallBack from './components/LoadingFallBack';
+import LoadingFallback from './components/LoadingFallBack';
 import NotFound from './components/NotFound';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallBack from './components/ErrorFallBack';
@@ -19,17 +19,37 @@ function App() {
       <div className='min-h-screen flex flex-col relative'>
         <Header />
         <MobileMenu />
-        <ErrorBoundary  FallbackComponent = {ErrorFallBack}>
-          <Suspense fallback = {<LoadingFallBack />}>
-            <Routes>
-              <Route path='/' element={<Main />} />
-              <Route path='/books' element={<Books />}/>
-              <Route path='/categories' element={<Categories />}/>
-              <Route path='/categories/:categoryName' element={<BookByCategory />}/>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
+          <Routes>
+            <Route path='/' element={<Main />} />
+            <Route 
+              path='/books' 
+              element={
+                <ErrorBoundary FallbackComponent={ErrorFallBack}>
+                  <Suspense fallback = {<LoadingFallback />}>
+                    <Books />
+                  </Suspense>
+                </ErrorBoundary>}
+            />
+            <Route 
+              path='/categories' 
+              element={
+                <ErrorBoundary FallbackComponent={ErrorFallBack}>
+                  <Suspense fallback = {<LoadingFallback />}>
+                    <Categories />
+                  </Suspense>
+                </ErrorBoundary>}
+            />
+            <Route 
+              path='/categories/:categoryName' 
+              element={
+                <ErrorBoundary FallbackComponent={ErrorFallBack}>
+                  <Suspense fallback = {<LoadingFallback />}>
+                    <BookByCategory />
+                  </Suspense>
+                </ErrorBoundary>}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
       </div>
       
     </Router>

@@ -1,4 +1,4 @@
-function ErrorFallBack({ error, resetErrorBoundary }) {
+function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <div role="alert">
       <p>Something went wrong:</p>
@@ -8,4 +8,4 @@ function ErrorFallBack({ error, resetErrorBoundary }) {
   );
 }
 
-export default ErrorFallBack;
+export default ErrorFallback;
