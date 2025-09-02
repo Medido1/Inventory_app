@@ -12,15 +12,15 @@ function Header() {
       <Link to="/">
         <img 
           className='h-14'
-          src={logo} alt="My Books - Return to homepage"
+          src={logo} alt="Home"
         />
       </Link>
       {isMobile && 
         <button 
           aria-label="Open menu"
-          aria-expanded= {!!isMenuOpen} // forces value to be boolean
+          aria-expanded= {isMenuOpen} 
           onClick={() => setIsMenuOpen(prev => !prev)}>
-          <RxHamburgerMenu style={{ color: "white", fontSize: "30px" }}/>
+          <RxHamburgerMenu className="text-white text-3xl"/>
         </button>
       }
       {!isMobile && <NavMenuDesk />}
