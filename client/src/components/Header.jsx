@@ -16,7 +16,7 @@ function Header() {
         />
       </Link>
 
-      <nav className="hidden sm:flex gap-4">
+      <nav className="hidden md:flex gap-4">
         <NavMenuDesk />
       </nav>
 
