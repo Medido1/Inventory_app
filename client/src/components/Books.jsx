@@ -7,9 +7,9 @@ import NewBookForm from './NewBookForm';
 import { AppStateContext } from '../context/AppStateContext';
 
 function Books() {
-  const {showForm} = useContext(UIContext);
-  const {booksData = []} = useContext(BooksContext)
-  const {currentBook} = useContext(AppStateContext)
+  const {showForm, setShowForm} = useContext(UIContext);
+  const {booksData = [], setBooksData} = useContext(BooksContext)
+  const {currentBook, setCurrentBook} = useContext(AppStateContext)
 
   return (
     <div className="p-4">
@@ -21,7 +21,18 @@ function Books() {
         (<ul className='sm:grid sm:gap-2 sm:grid-cols-2'>
           {booksData.map((book) => 
             <li key={book.id}>
-              <BookCard book = {book}/>
+              <BookCard book = {book}
+                onEdit={(book) => {
+                  setShowForm(true)
+                  setCurrentBook(book)
+                }}
+                onDelete={(id) => {
+                  if (window.confirm("Are you sure you want to delete this book ?")) {
+                    const filterdBooks = booksData.filter((book) => book.id !== id);
+                    setBooksData(filterdBooks);
+                  }
+                }}
+              />
             </li>
           )}
         </ul>)

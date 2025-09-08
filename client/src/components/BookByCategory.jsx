@@ -7,9 +7,9 @@ import { useContext } from 'react';
 import NewBookForm from './NewBookForm';
 
 function BookByCategory() {
-  const {showForm} = useContext(UIContext);
-  const {booksData} = useContext(BooksContext);
-  const {currentBook} = useContext(AppStateContext)
+  const {showForm, setShowForm} = useContext(UIContext);
+  const {booksData, setBooksData} = useContext(BooksContext);
+  const {currentBook, setCurrentBook} = useContext(AppStateContext)
   const { categoryName } = useParams(); //get category name from url
   const filteredBooks = booksData.filter(book => book.categories.includes(categoryName))
 
@@ -23,7 +23,18 @@ function BookByCategory() {
         <ul className='sm:grid sm:grid-cols-2 md:grid-cols-3 gap-2'>
         {filteredBooks.map((book) => 
           <li key={book.id}>
-            <BookCard book = {book}/>
+            <BookCard book = {book}
+              onEdit={(book) => {
+                setShowForm(true)
+                setCurrentBook(book)
+              }}
+              onDelete={(id) => {
+                if (window.confirm("Are you sure you want to delete this book ?")) {
+                  const filterdBooks = booksData.filter((book) => book.id !== id);
+                  setBooksData(filterdBooks);
+                }
+              }}
+            />
           </li>
         )}
       </ul>
