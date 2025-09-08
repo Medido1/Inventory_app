@@ -1,11 +1,6 @@
-import { useContext } from "react";
-import { UIContext } from "../context/UIContext";
-import { AppStateContext } from "../context/AppStateContext";
 import emptyCoverIcon from '../assets/question-sign.png';
 
-function BookPreview() {
-  const {previewUrl} = useContext(UIContext)
-  const {state} = useContext(AppStateContext)
+function BookPreview({previewUrl, title, author, categories}) {  
   
   return (
     <div className="bg-slate-300 p-4 mt-4 rounded-md flex sm:mx-auto sm:min-w-[380px]
@@ -19,15 +14,15 @@ function BookPreview() {
           <p>No Cover provided ! </p>
         </div>
         :
-        <img className="h-[160px]" src={previewUrl} alt={`${state.title} cover`}/>
+        <img className="h-[160px]" src={previewUrl} alt={`${title} cover`}/>
       } 
       <div className="text-center flex-1 w-full">
         <h2 className="text-xl">
-          {state.title}
+          {title}
         </h2>
-        <p>{state.author}</p>
+        <p>{author}</p>
         <ul className="text-blue-400 flex flex-col">
-          {state.categories?.map((category) =>
+          {categories?.map((category) =>
             <li
               key={category}>
               {category}

@@ -6,11 +6,14 @@ import NewBookForm from './NewBookForm';
 import BookPreview from './BookPreview';
 import BookSubmissionModal from "./BookSubmissionModal";
 import { UIContext } from '../context/UIContext';
+import { AppStateContext } from '../context/AppStateContext';
 import { useContext, useState } from 'react';
 
 function Main() {
-  const {isMobile} = useContext(UIContext)
+  const {isMobile, previewUrl} = useContext(UIContext)
+  const {state} = useContext(AppStateContext)
   const [showNewBookForm, setShowNewBookForm] = useState(false);
+  
 
   return (
     <main className="main flex-1 flex flex-col p-4 bg-slate-100">
@@ -51,7 +54,11 @@ function Main() {
       {(showNewBookForm !== isMobile) && (
         <div className="md:flex">
           <NewBookForm />
-          <BookPreview />
+          <BookPreview 
+            previewUrl={previewUrl}
+            title={state.title}
+            author={state.author}
+            categories={state.categories}/>
         </div>
       )}
 
