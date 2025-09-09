@@ -11,9 +11,9 @@ function Books() {
   const {booksData = [], setBooksData} = useContext(BooksContext)
   const {currentBook, setCurrentBook} = useContext(AppStateContext)
 
-  function confirmDelete(id) {
+  function confirmDelete(book) {
     if (window.confirm("Are you sure you want to delete this book ?")) {
-      const filteredBooks = booksData.filter((book) => book.id !== id);
+      const filteredBooks = booksData.filter((b) => b.id !== book.id);
       setBooksData(filteredBooks);
     }
   }
