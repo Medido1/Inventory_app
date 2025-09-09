@@ -12,9 +12,12 @@ import { useContext, useState } from 'react';
 function Main() {
   const {isMobile, previewUrl} = useContext(UIContext)
   const {state} = useContext(AppStateContext)
+  const {title = "", author = "", categories = []} = state || {};
   const [showNewBookForm, setShowNewBookForm] = useState(false);
-  
 
+  // show form on mobile, hide it in desktop
+  const showForm = isMobile || (!isMobile && showNewBookForm) 
+  
   return (
     <main className="main flex-1 flex flex-col p-4 bg-slate-100">
       <h1 className="text-2xl text-center">Welcome to My Books</h1>
@@ -51,14 +54,14 @@ function Main() {
         </div>
       </div>
       
-      {(showNewBookForm !== isMobile) && (
+      {showForm && ( 
         <div className="md:flex">
           <NewBookForm />
           <BookPreview 
             previewUrl={previewUrl}
-            title={state.title}
-            author={state.author}
-            categories={state.categories}/>
+            title={title}
+            author={author}
+            categories={categories}/>
         </div>
       )}
 
@@ -70,7 +73,7 @@ function Main() {
           Add new book!!
         </button>
       }
-      <BookSubmissionModal />
+      <BookSubmissionModal setShowNewBookForm={setShowNewBookForm}/>
     </main>
   )
 }

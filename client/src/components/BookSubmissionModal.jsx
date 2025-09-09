@@ -4,7 +4,7 @@ import verifiedIcon from "../assets/verified.gif";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-function BookSubmissionModal() {
+function BookSubmissionModal({setShowNewBookForm}) {
   const {isBookModalOpen, setBookModalOpen} = useContext(UIContext);
   
   // Close on Escape
@@ -37,12 +37,18 @@ function BookSubmissionModal() {
           </div>
           <div className="flex gap-4 mt-4">
             <button
-              onClick={() => setBookModalOpen(false)}
+              onClick={() => {
+                setShowNewBookForm(false)
+                setBookModalOpen(false)
+              }}
               className="bg-gray-200 px-4 py-2 rounded-lg">
               Close
             </button>
             <Link
-              onClick={() => setBookModalOpen(false)}
+              onClick={() => {
+                setShowNewBookForm(false)
+                setBookModalOpen(false)
+              }}
               to = "/books"
               className="bg-gray-200 px-4 py-2 rounded-lg">
               View Books
