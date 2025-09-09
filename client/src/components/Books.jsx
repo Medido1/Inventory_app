@@ -11,10 +11,22 @@ function Books() {
   const {booksData = [], setBooksData} = useContext(BooksContext)
   const {currentBook, setCurrentBook} = useContext(AppStateContext)
 
+  function confirmDelete(id) {
+    if (window.confirm("Are you sure you want to delete this book ?")) {
+      const filteredBooks = booksData.filter((book) => book.id !== id);
+      setBooksData(filteredBooks);
+    }
+  }
+
+  function handleEdit(book) {
+    setShowForm(true)
+    setCurrentBook(book)
+  }
+
   return (
     <div className="p-4">
       <div className='flex items-center gap-4 mb-4'>
-        <img src={viewIcon} alt="icon" className='h-10' aria-label='hidden' />
+        <img src={viewIcon} alt="icon" className='h-10' />
         <h1 className="text-2xl text-center">My Books</h1>
       </div>
       {booksData.length > 0 ? 
@@ -22,16 +34,8 @@ function Books() {
           {booksData.map((book) => 
             <li key={book.id}>
               <BookCard book = {book}
-                onEdit={(book) => {
-                  setShowForm(true)
-                  setCurrentBook(book)
-                }}
-                onDelete={(id) => {
-                  if (window.confirm("Are you sure you want to delete this book ?")) {
-                    const filterdBooks = booksData.filter((book) => book.id !== id);
-                    setBooksData(filterdBooks);
-                  }
-                }}
+                onEdit={handleEdit}
+                onDelete={confirmDelete}
               />
             </li>
           )}
