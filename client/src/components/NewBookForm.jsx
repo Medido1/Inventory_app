@@ -146,18 +146,19 @@ function NewBookForm() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type category and press enter"
-            className="bg-gray-200 rouned-md p-2"
+            className="bg-gray-200 rounded-md p-2"
           />
         </div>
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag, index) => (
-            <span className="flex gap-2 bg-gray-200 p-2 rounded-lg" key={index}>
+          {tags.map((tag) => (
+            <span className="flex gap-2 bg-gray-200 p-2 rounded-lg" key={tag}>
               {tag}
               <button
                 onClick={(e) => {
                   e.preventDefault();
                   removeTag(tag);
                 }}
+                aria-label="remove tag"
               >
                 x
               </button>
@@ -173,7 +174,6 @@ function NewBookForm() {
       ) : (
         <div className="flex gap-2">
           <button
-            type="submit"
             onClick={updateBook}
             className="px-4 py-2 bg-green-200 rounded-md"
           >
