@@ -12,16 +12,6 @@ function CoverInput() {
 
   const fileInputRef = useRef(null);
 
-  /*  Cleanup effect: revokes the previous object URL to free memory 
-  whenever previewUrl changes or the component unmounts */
-  useEffect(() => {
-    return () => {
-      if (previewUrl && previewUrl.startsWith("blob:")) {
-        URL.revokeObjectURL(previewUrl);
-      }
-    };
-  }, []);
-
   const verifyFileValidity = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -33,32 +23,27 @@ function CoverInput() {
 
   const handleFile = (file) => {
     const isValidType = ["image/jpeg", "image/png"].includes(file.type);
+
     const isValidSize = file.size <= 600 * 1024; // 600KB
 
     if (!isValidType || !isValidSize) {
       setErrMsg("Invalid file!! Please choose a JPG or PNG image under 600KB.");
-      if (previewUrl && previewUrl.startsWith("blob:")) {
-        URL.revokeObjectURL(previewUrl);
-      }
       setPreviewUrl(null);
-    } else {
-      if (previewUrl && previewUrl.startsWith("blob:")) {
-        URL.revokeObjectURL(previewUrl);
-      }
-
-      // Create FileReader instance to convert file to base64
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64 = e.target.result; //presists in localStorage
-        setPreviewUrl(base64);
-      };
-      reader.readAsDataURL(file);
-      setErrMsg("");
+      return;
     }
+
+    // Create FileReader instance to convert file to base64
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64 = e.target.result; //presists in localStorage
+      setPreviewUrl(base64);
+    };
+    reader.readAsDataURL(file);
+    setErrMsg("");
   };
 
   useEffect(() => {
-    if (currentBook) {
+    if (currentBook && currentBook.cover) {
       setPreviewUrl(currentBook.cover);
     } else {
       setPreviewUrl(null);
@@ -94,6 +79,7 @@ function CoverInput() {
                 onClick={() => {
                   setPreviewUrl(null);
                 }}
+                aria-label="remove book cover"
               >
                 Remove
               </button>
@@ -104,6 +90,7 @@ function CoverInput() {
                   e.preventDefault();
                   fileInputRef.current.click();
                 }}
+                aria-label="change book cover"
               >
                 Change
               </button>
