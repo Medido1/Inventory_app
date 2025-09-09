@@ -8,11 +8,11 @@ function Categories() {
 
   // Cache categories list to avoid recalculating on every render
   const categoriesList = useMemo(() => {
-    const set = new Set();
+    const set = new Set(); //only stores unique values
     booksData?.forEach((book) => {
       book.categories?.forEach((c) => set.add(c))
     });
-    return [...set]
+    return [...set] // convert set into an array
   }, [booksData])
 
   return (
