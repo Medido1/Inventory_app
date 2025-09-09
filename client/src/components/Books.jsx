@@ -30,7 +30,7 @@ function Books() {
         <h1 className="text-2xl text-center">My Books</h1>
       </div>
       {booksData.length > 0 ? 
-        (<ul className='sm:grid sm:gap-2 sm:grid-cols-2'>
+        (<ul className='sm:grid sm:gap-2 sm:grid-cols-2 md:grid-cols-4'>
           {booksData.map((book) => 
             <li key={book.id}>
               <BookCard book = {book}
