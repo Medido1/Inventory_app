@@ -1,22 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useMemo} from 'react';
 import { BooksContext } from '../context/BooksContext';
 import categoriesIcon from '../assets/categories.gif';
 import { Link } from 'react-router-dom';
 
 function Categories() {
-  const [categoriesList, setCategoriesList] = useState([]);
   const {booksData} = useContext(BooksContext);
 
-  useEffect(() => {
-    const uniqueCategories = [];
+  // Cache categories list to avoid recalculating on every render
+  const categoriesList = useMemo(() => {
+    const set = new Set();
     booksData?.forEach((book) => {
-      book.categories.forEach((category) => {
-        if (!uniqueCategories.includes(category)) {
-          uniqueCategories.push(category)
-        }
-      }) 
-    })
-    setCategoriesList(uniqueCategories)
+      book.categories?.forEach((c) => set.add(c))
+    });
+    return [...set]
   }, [booksData])
 
   return (
@@ -33,6 +29,7 @@ function Categories() {
               key={category}
               className='bg-slate-200 p-4 text-black rounded-md text-center text-xl mb-4
                 font-bold cursor-pointer'
+                aria-label={`View ${category} books`}
             >
               {category}
             </Link>
